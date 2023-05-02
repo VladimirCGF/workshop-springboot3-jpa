@@ -2,9 +2,10 @@ package com.example.course.entities;
 
 import jakarta.persistence.*;
 
-import javax.annotation.processing.Generated;
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 @Entity
 @Table(name = "tbl_user")
@@ -23,6 +24,9 @@ public class User implements Serializable {
 
     public User() {
     }
+
+    @OneToMany(mappedBy = "client")
+    private List<Order> orders = new ArrayList<>();
 
     public User(Integer id, String name, String email, String phone, String password) {
         this.id = id;
@@ -72,6 +76,9 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
